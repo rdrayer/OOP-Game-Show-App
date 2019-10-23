@@ -55,7 +55,7 @@ class Game {
         $(button).addClass('wrong');
         this.removeLife();
     }
-    if (this.checkForWin()=== true) {
+    if (this.checkForWin() === true) {
         this.gameOver(true);
     }
   }
@@ -82,19 +82,18 @@ class Game {
    */
   checkForWin() {
     const letterList = document.querySelectorAll('#phrase ul li');
-    //no words selected yet
     let wordCount = 0;
 
-     for (let i = 0; i < letterList.length; i++) {
-      if (letterList[i].className !== 'show') {
+    letterList.forEach(letter => {
+      if (letter.className !== 'show') {
         wordCount ++;
       }
-       if (wordCount === 0) {
-        return true;
-      }
-       else {
-        return false;
-      }
+    });
+
+    if (wordCount === 0) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -112,7 +111,7 @@ class Game {
       overlay.style.display = 'block';
       overlay.className = 'win';
     } else {
-      gameOver.innerHTML = 'You lost!';
+      gameOver.innerHTML = 'You lose!';
       overlay.style.display = 'block';
       overlay.className = 'lose';
     }

@@ -2,7 +2,7 @@
  * Project 4 - OOP Game App
  * Phrase.js */
 
- class Phrase {
+  class Phrase {
    constructor(phrase) {
      this.phrase = phrase.toLowerCase();
    }
@@ -11,25 +11,23 @@
     * Display phrase on game board
     */
    addPhraseToDisplay() {
-     const phraseUl = document.querySelector('#phrase ul');
-     let splitPhrase = this.phrase.split('');
-     let sentence = '';
+    const phraseUl = document.querySelector('#phrase ul');
+    let splitPhrase = this.phrase.split('');
+    let sentence = '';
 
-     splitPhrase.forEach(character => {
-       let checkSpace = /[^\s]/.test(character);
-       let phrase = `<li class = "hide letter ${character}">${character}</li>`;
-       let space = `<li class = "space"> </li>`;
-
-         if (checkSpace) {
-           sentence += phrase;
-         }
-         else {
-           sentence += space;
-         }
-     });
-
-     phraseUl.innerHTML = sentence;
-     return phraseUl;
+    splitPhrase.forEach(character => {
+      let checkSpace = /[^\s]/.test(character);
+      let phrase = `<li class = "hide letter ${character}">${character}</li>`;
+      let space = `<li class = "hide space"> </li>`;
+      if (checkSpace) {
+        sentence += phrase;
+      }
+      else {
+        sentence += space;
+      }
+    });
+    phraseUl.innerHTML = sentence;
+    return phraseUl;
    }
 
    /**
@@ -37,8 +35,8 @@
     * @param (string) letter - Letter to check
     */
    checkLetter(letter) {
-     let letterInclude = this.phrase.includes(letter);
-     return letterInclude;
+    const checkLetter = this.phrase.includes(letter);
+    return checkLetter;
    }
 
    /**
@@ -46,14 +44,14 @@
     * @param (string) letter - Letter to display
     */
    showMatchedLetter(letter) {
-     const phraseMatch = document.querySelectorAll('#phrase ul li');
+   const phraseMatch = document.querySelectorAll('#phrase ul li');
 
-     for (let i = 0; i < phraseMatch.length; i++) {
-       let letterTo = phraseMatch[i].innerHTML;
-       if (letterTo === letter) {
-         phraseMatch[i].className = 'show';
-       }
-     }
-   }
+    phraseMatch.forEach(character => {
+      let charRefined = character.innerHTML;
+      if (charRefined === letter) {
+        character.className = 'show';
+      }
+    });
+    }
    
-}
+  } //end

@@ -66,14 +66,13 @@ class Game {
    * Checks if player has remaining lives and ends game if player is out
    */
   removeLife() {
-    this.missed += 1;
-    const hearts = document.querySelectorAll('ol img');
+    const lives = document.querySelectorAll('#scoreboard ol img');
+    this.missed ++;
 
-    hearts[this.missed - 1].src = 'images/lostHeart.png';
-        if (this.missed === 5) {
-
-            this.gameOver();
-        }
+    lives[this.missed - 1].src = 'images/lostHeart.png';
+      if (this.missed == 5) {
+        this.gameOver();
+      }
   }
 
   /**

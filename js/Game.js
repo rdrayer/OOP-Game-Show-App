@@ -12,13 +12,11 @@ class Game {
   //Method to hold five phrases to add to phrases property:
   createPhrases() {
    const fivePhrases = [
-     new Phrase('test'),
-     new Phrase('one'),
-     //new Phrase('A friend in need is a friend indeed'),
-     //new Phrase('Close but no cigar'),
-     //new Phrase('Curiosity killed the cat'),
-     //new Phrase('Kill two birds with one stone'),
-     //new Phrase('Like shooting fish in a barrel')
+     new Phrase('Is this thing on'),
+     new Phrase('Close but no cigar'),
+     new Phrase('Curiosity killed the cat'),
+     new Phrase('Kill two birds with one stone'),
+     new Phrase('Like shooting fish in a barrel')
    ];
    return fivePhrases;
   }
@@ -47,17 +45,21 @@ class Game {
    * @param (HTMLButtonElement) button - The clicked button element
    */
   handleInteraction(button) {
-    const keyButton = document.getElementById('qwerty');
-
     if (event.type === 'click') {
-       keyButton.className = 'wrong';
+      $(button).attr('disabled', 'disabled');
+    }  
+
+    if (!this.activePhrase.checkLetter($(button).text()) === true) {
+      $(button).addClass('wrong');
+      this.removeLife();
     } else {
-        $(button).addClass('wrong');
-        this.removeLife();
-    }
-    if (this.checkForWin() === true) {
-        this.gameOver(true);
-    }
+        $(button).addClass('chosen');
+        this.activePhrase.showMatchedLetter($(button).text());
+        if (this.checkForWin(false)) {
+            this.gameOver(true);
+        }
+    } 
+    //console.log(button);
   }
 
   /**
@@ -80,6 +82,7 @@ class Game {
    * @return {boolean} True if game has been won, false if game wasn't won
    */
   checkForWin() {
+    /*
     const letterList = document.querySelectorAll('#phrase ul li');
     let wordCount = 0;
 
@@ -88,14 +91,14 @@ class Game {
         wordCount ++;
       }
     });
+    console.log(wordCount);
 
     if (wordCount === 0) {
       return true;
     } else {
       return false;
-    }
+    } */
   }
-
 
   /**
    * Displays game over message
@@ -110,14 +113,24 @@ class Game {
       overlay.style.display = 'block';
       overlay.className = 'win';
     } else {
-      gameOver.innerHTML = 'You lose!';
+      gameOver.innerHTML = "You lose, but it's okay, try again!";
       overlay.style.display = 'block';
       overlay.className = 'lose';
     }
   }
 
+  resetGame() {
+    //remove li elements from the Phrase ul element
+    $('.hide letter').remove();
+    $('.hide space').remove();
 
+    //update onscreen button CSS class to 'key' and enable buttons again
+    $('button').removeClass('chosen');
+    $('button').removeClass('wrong');
+    $('button').addClass('key');
+    $('button').removeAttr('disabled');
 
-
-
-}
+    //reset heart images
+    $('.tries img').attr('src', 'images/liveHeart.png');
+  }
+} //end

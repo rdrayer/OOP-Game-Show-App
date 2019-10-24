@@ -19,12 +19,12 @@
       let checkSpace = /[^\s]/.test(character);
       let phrase = `<li class = "hide letter ${character}">${character}</li>`;
       let space = `<li class = "hide space"> </li>`;
-      if (checkSpace) {
-        sentence += phrase;
-      }
-      else {
-        sentence += space;
-      }
+        if (checkSpace) {
+          sentence += phrase;
+        }
+        else {
+          sentence += space;
+        }
     });
     phraseUl.innerHTML = sentence;
     return phraseUl;

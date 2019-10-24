@@ -82,22 +82,13 @@ class Game {
    * @return {boolean} True if game has been won, false if game wasn't won
    */
   checkForWin() {
-    /*
-    const letterList = document.querySelectorAll('#phrase ul li');
-    let wordCount = 0;
-
-    letterList.forEach(letter => {
-      if (letter.className !== 'show') {
-        wordCount ++;
+    let phraseLength = $('.letter').length;
+    //console.log(phraseLength);
+      if (phraseLength === 0) {
+        return true;
+      } else {
+        return false;
       }
-    });
-    console.log(wordCount);
-
-    if (wordCount === 0) {
-      return true;
-    } else {
-      return false;
-    } */
   }
 
   /**
